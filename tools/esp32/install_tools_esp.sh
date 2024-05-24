@@ -32,18 +32,6 @@ add_path() {
   PATH=$1:${PATH}
 }
 
-
-RUN mkdir -p /tools/blobs && cd /tools/blobs \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32.bin" -o bootloader-esp32.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32c3.bin" -o bootloader-esp32c3.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32s2.bin" -o bootloader-esp32s2.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32s3.bin" -o bootloader-esp32s3.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32.bin" -o partition-table-esp32.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32c3.bin" -o partition-table-esp32c3.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32s2.bin" -o partition-table-esp32s2.bin \
-  && curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32s3.bin" -o partition-table-esp32s3.bin
-
-
 xtensa_esp32_blobs() {
 
   if [ ! -f "${NUTTXTOOLS}/blobs/bootloader-esp32.bin" ]; then
