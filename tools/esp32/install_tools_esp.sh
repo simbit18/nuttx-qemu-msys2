@@ -49,14 +49,14 @@ xtensa_esp32_blobs() {
   if [ ! -f "${NUTTXTOOLS}/blobs/bootloader-esp32.bin" ]; then
     mkdir -p "${NUTTXTOOLS}"/blobs
     cd "${NUTTXTOOLS}"/blobs
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32.bin" -o bootloader-esp32.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32c3.bin" -o bootloader-esp32c3.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32s2.bin" -o bootloader-esp32s2.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32s3.bin" -o bootloader-esp32s3.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32.bin" -o partition-table-esp32.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32c3.bin" -o partition-table-esp32c3.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32s2.bin" -o partition-table-esp32s2.bin
-    curl -s -L "https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32s3.bin" -o partition-table-esp32s3.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32c3.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32s2.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/bootloader-esp32s3.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32c3.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32s2.bin
+    curl -O -L https://github.com/espressif/esp-nuttx-bootloader/releases/download/latest/partition-table-esp32s3.bin
   fi
 }
 
@@ -85,7 +85,7 @@ xtensa_esp32_gcc_toolchain() {
     basefile=xtensa-esp32-elf-12.2.0_20230208-x86_64-w64-mingw32
     cd "${NUTTXTOOLS}"
     # Download the latest ESP32 GCC toolchain prebuilt by Espressif
-    wget --quiet https://github.com/espressif/crosstool-NG/releases/download/esp-12.2.0_20230208/${basefile}.zip
+    curl -O -L https://github.com/espressif/crosstool-NG/releases/download/esp-12.2.0_20230208/${basefile}.zip
     unzip -qo ${basefile}.zip
     rm ${basefile}.zip
   fi
