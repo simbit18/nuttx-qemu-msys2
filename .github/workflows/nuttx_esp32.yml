@@ -97,7 +97,8 @@ jobs:
           make ESPTOOL_BINDIR=../tools/blobs EXTRAFLAGS=-DESP32_IGNORE_CHIP_REVISION_CHECK -j4
 
           ls -a
-          cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
+          # to_do
+          ## cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
           cp nuttx.bin  nuttxesp32/nuttx.bin
           cp nuttx.defconfig  nuttxesp32/defconfig
           cp System.map  nuttxesp32/System.map
