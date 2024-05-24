@@ -2,7 +2,7 @@ name: Nuttx-esp32 QEMU
 
 permissions:
   ## Allow publishing of GitHub Release
-  contents: read
+  contents: write
 on: 
   workflow_dispatch:
   push:
