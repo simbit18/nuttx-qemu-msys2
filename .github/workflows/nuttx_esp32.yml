@@ -70,7 +70,7 @@ jobs:
       - name: Build
         run: |
           echo 'Build'
-
+          source ./nuttxspace/tools/env.sh
           ## Move to nuttx
           cd nuttxspace/nuttx
           ls -a
