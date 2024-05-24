@@ -60,8 +60,9 @@ jobs:
           ## tar zxf apps.tar.gz --one-top-level=apps --strip-components 1
           ## ls -a
           ## cd nuttx
+          ls -a
           echo 'Copy tools'
-          cp -f ../../tools/esp32/install_tools_esp.sh install_tools_esp.sh
+          cp -f ../tools/esp32/install_tools_esp.sh install_tools_esp.sh
           ls -a
           ./install_tools_esp.sh
 
