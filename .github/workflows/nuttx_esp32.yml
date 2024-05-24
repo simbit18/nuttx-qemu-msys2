@@ -87,14 +87,14 @@ jobs:
           ## Enable CONFIG_ESP32_QEMU_IMAGE
           kconfig-tweak --enable CONFIG_ESP32_QEMU_IMAGE
 
-          make savedefconfig
+          ## make savedefconfig
 
           mkdir nuttxesp32
 
           ## Preserve the build config
           cp .config nuttxesp32/nuttx.config
 
-          make ESPTOOL_BINDIR=../tools/blobs EXTRAFLAGS="-DESP32_IGNORE_CHIP_REVISION_CHECK"
+          make ESPTOOL_BINDIR=../tools/blobs EXTRAFLAGS=-DESP32_IGNORE_CHIP_REVISION_CHECK -j4
 
           ls -a
           cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
