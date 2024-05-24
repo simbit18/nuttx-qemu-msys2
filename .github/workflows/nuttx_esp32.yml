@@ -43,34 +43,6 @@ jobs:
           echo 'pip3 install'
           uname
           pip3 install --root-user-action=ignore --no-cache-dir pyelftools cxxfilt kconfiglib
-
-      - name: Install kconfig-frontends
-        run: |
-          echo 'Install kconfig-frontends'
-          curl -L https://bitbucket.org/nuttx/tools/get/master.tar.gz -o nuttx-tools.tar.gz
-          mkdir nuttx-tools
-          tar xvzf nuttx-tools.tar.gz --strip-components=1 -C nuttx-tools
-          cd nuttx-tools/kconfig-frontends
-          ./configure --prefix=/opt/nuttxenv/usr --enable-mconf --disable-gconf --disable-qconf --disable-shared --disable-nconf
-          make install
-          
-      - name: Install genromfs
-        run: |
-          echo 'Install genromfs'
-          cd nuttx-tools
-          tar xzf genromfs-0.5.2.tar.gz
-          cd genromfs-0.5.2
-          make install PREFIX=/opt/nuttxenv
-
-      - name: Copy NXTOOL GENROMFS and clean source files
-        run: |
-          echo 'Copy NXTOOL GENROMFS and clean source files'
-          cp /opt/nuttxenv/usr/bin/kconfig-conf.exe /usr/bin
-          cp /opt/nuttxenv/usr/bin/kconfig-mconf.exe /usr/bin
-          cp /opt/nuttxenv/usr/bin/kconfig-tweak /usr/bin
-          cp /opt/nuttxenv/usr/bin/genromfs.exe /usr/bin
-          rm -rf nuttx-tools genromfs-0.5.2
-          ls -a
           
       - name: Checkout Source Files
         run: |
@@ -88,7 +60,10 @@ jobs:
           ## tar zxf apps.tar.gz --one-top-level=apps --strip-components 1
           ## ls -a
           ## cd nuttx
+          echo 'Copy tools'
+          cp -f ../../tools/esp32/install_tools_esp.sh install_tools_esp.sh
           ls -a
+          ./install_tools_esp.sh
 
       - name: Build
         run: |
