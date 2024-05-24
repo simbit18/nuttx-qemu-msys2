@@ -75,24 +75,44 @@ jobs:
           cd nuttxspace/nuttx
           ls -a
 
-          ## Show the GCC version
-          gcc -v
+          ## Show the xtensa-esp32-elf-gcc version
+          xtensa-esp32-elf-gcc --version
           ## ls -a ../../
-          ## cp -f ../../fix/1200/defconfig boards/sim/sim/sim/configs/nsh/defconfig
-          ## cp -f ../../fix/1200/sim_hostmisc.c arch/sim/src/sim/posix/sim_hostmisc.c
-          ## cp -f ../../fix/1200/lib_exit.c libs/libc/stdlib/lib_exit.c
-          
+          cp -f ../../tools/esp32/Config.mk tools/esp32/Config.mk
+
           ## Configure the build
-          ####./tools/configure.sh -g sim:nsh
-          
-          ## mkdir nuttxmsys2
-          
+          ./tools/configure.sh -g esp32-devkitc:nsh
+
+          echo 'Enable CONFIG_ESP32_QEMU_IMAGE'
+          ## Enable CONFIG_ESP32_QEMU_IMAGE
+          kconfig-tweak --enable CONFIG_ESP32_QEMU_IMAGE
+
+          make savedefconfig
+
+          mkdir nuttxesp32
+
           ## Preserve the build config
-          ## cp .config nuttxmsys2/nuttx.config
-          ######make -j 4
+          cp .config nuttxesp32/nuttx.config
+
+          make ESPTOOL_BINDIR=../tools/blobs EXTRAFLAGS="-DESP32_IGNORE_CHIP_REVISION_CHECK"
+
           ls -a
-          ## cp nuttx.exe nuttxmsys2/nuttx.exe
-          ## cp System.map nuttxmsys2/System.map
-          ## cp /usr/bin/msys-2.0.dll nuttxmsys2/msys-2.0.dll
-          ## cp /usr/bin/msys-z.dll nuttxmsys2/msys-z.dll
-          ## zip -r nuttxmsys2.zip nuttxmsys2
+          cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
+          cp nuttx.bin  nuttxesp32/nuttx.bin
+          cp nuttx.defconfig  nuttxesp32/defconfig
+          cp System.map  nuttxesp32/System.map
+          zip -r  nuttxesp32.zip  nuttxesp32
+
+      - name: Get Current Date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Publish the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nuttx-esp32-qemu-${{ steps.date.outputs.date }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+          files: |
+            nuttxspace/nuttx/nuttxesp32.zip
