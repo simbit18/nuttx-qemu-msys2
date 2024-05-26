@@ -89,7 +89,6 @@ jobs:
           make -j4
 
           ls -a
-          cp nuttx.merged.bin nuttxrvvirt/nuttx.merged.bin
           cp nuttx.bin nuttxrvvirt/nuttx.bin
           cp defconfig nuttxrvvirt/defconfig
           cp System.map nuttxrvvirt/System.map
