@@ -1,0 +1,110 @@
+name: Nuttx-rv-virt QEMU
+
+permissions:
+  ## Allow publishing of GitHub Release
+  contents: write
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/nuttx_rvvirt.yml'
+
+jobs:
+  nuttx-rvvirt:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MSYS
+          update: false
+          install: >-
+            base-devel
+            gcc
+            gperf
+            automake
+            autoconf
+            git
+            python3
+            ncurses-devel
+            unzip
+            zip
+            tio
+            zlib-devel
+            cmake
+            ninja
+            python-pip 
+            vim
+
+      - name: pip3 install
+        run: |
+          echo 'pip3 install'
+          uname
+          pip3 install --root-user-action=ignore --no-cache-dir pyelftools cxxfilt kconfiglib
+          
+      - name: Checkout Source Files
+        run: |
+          echo 'Checkout Source Files'
+          mkdir nuttxspace
+          ls -a
+          cd nuttxspace
+          ## git clone https://github.com/apache/incubator-nuttx nuttx
+          ## git clone https://github.com/apache/incubator-nuttx-apps apps
+          git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx.git nuttx
+          git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx-apps.git apps
+          ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-12.0.0.tar.gz?action=download -o nuttx.tar.gz
+          ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-apps-12.0.0.tar.gz?action=download -o apps.tar.gz
+          ## tar zxf nuttx.tar.gz --one-top-level=nuttx --strip-components 1
+          ## tar zxf apps.tar.gz --one-top-level=apps --strip-components 1
+          ## ls -a
+          ## cd nuttx
+          ls -a
+          echo 'Copy tools'
+          cp -f ../tools/rv-virt/install_tools_rvvirt.sh install_tools_rvvirt.sh
+          ls -a
+          ./install_tools_rvvirt.sh
+
+      - name: Build
+        run: |
+          echo 'Build'
+          source ./nuttxspace/tools/env.sh
+          ## Move to nuttx
+          cd nuttxspace/nuttx
+          ls -a
+
+          ## Show the riscv-none-elf-gcc version
+          riscv-none-elf-gcc --version
+
+          ## Configure the build
+          ./tools/configure.sh -g rv-virt:nsh
+
+          mkdir nuttxrvvirt
+
+          ## Preserve the build config
+          cp .config nuttxrvvirt/nuttx.config
+
+          make -j4
+
+          ls -a
+          cp nuttx.merged.bin nuttxrvvirt/nuttx.merged.bin
+          cp nuttx.bin nuttxrvvirt/nuttx.bin
+          cp defconfig nuttxrvvirt/defconfig
+          cp System.map nuttxrvvirt/System.map
+          zip -r nuttxrvvirt.zip nuttxrvvirt
+
+      - name: Get Current Date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Publish the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nuttx-rvvirt-qemu-${{ steps.date.outputs.date }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+          files: |
+            nuttxspace/nuttx/nuttxrvvirt.zip
