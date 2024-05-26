@@ -97,6 +97,10 @@ jobs:
           make ESPTOOL_BINDIR=../tools/blobs EXTRAFLAGS=-DESP32_IGNORE_CHIP_REVISION_CHECK -j4
 
           ls -a
+          ## touch nuttxesp32/nuttx.merged.bin
+          esptool.exe -c esp32 merge_bin --output nuttx.merged.bin --fill-flash-size 4MB -fm dio -ff 40m  0x1000 ../tools/blobs/bootloader-esp32.bin 0x8000 ../tools/blobs/partition-table-esp32.bin 0x10000 nuttx.bin
+          ls -a
+          
           # to_do
           ## cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
           cp nuttx.bin nuttxesp32/nuttx.bin
