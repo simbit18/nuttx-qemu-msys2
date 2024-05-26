@@ -86,6 +86,7 @@ jobs:
           echo 'Enable CONFIG_ESP32_QEMU_IMAGE'
           ## Enable CONFIG_ESP32_QEMU_IMAGE
           kconfig-tweak --enable CONFIG_ESP32_QEMU_IMAGE
+          kconfig-tweak --enable CONFIG_ESP32_MERGE_BINS
 
           ## make savedefconfig
 
@@ -98,11 +99,11 @@ jobs:
 
           ls -a
           ## touch nuttxesp32/nuttx.merged.bin
-          esptool.exe -c esp32 merge_bin --output nuttx.merged.bin --fill-flash-size 4MB -fm dio -ff 40m  0x1000 ../tools/blobs/bootloader-esp32.bin 0x8000 ../tools/blobs/partition-table-esp32.bin 0x10000 nuttx.bin
+          ## esptool.exe -c esp32 merge_bin --output nuttx.merged.bin --fill-flash-size 4MB -fm dio -ff 40m  0x1000 ../tools/blobs/bootloader-esp32.bin 0x8000 ../tools/blobs/partition-table-esp32.bin 0x10000 nuttx.bin
           ls -a
           
           # to_do
-          ## cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
+          cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
           cp nuttx.bin nuttxesp32/nuttx.bin
           cp defconfig nuttxesp32/defconfig
           cp System.map nuttxesp32/System.map
