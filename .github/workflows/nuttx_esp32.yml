@@ -102,7 +102,7 @@ jobs:
           cp nuttx.bin nuttxesp32/nuttx.bin
           cp defconfig nuttxesp32/defconfig
           cp System.map nuttxesp32/System.map
-          zip -r  nuttxesp32.zip  nuttxesp32
+          zip -r nuttxesp32.zip nuttxesp32
 
       - name: Get Current Date
         id: date
