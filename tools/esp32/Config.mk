@@ -175,11 +175,11 @@ define MERGEBIN
 		echo "Missing Flash memory size configuration for the ESP32 chip."; \
 		exit 1; \
 	fi
-	$(eval ESPTOOL_MERGEBIN_OPTS :=                                              \
-		$(if $(CONFIG_ESP32_QEMU_IMAGE),                                         \
+	$(eval ESPTOOL_MERGEBIN_OPTS := \
+		$(if $(CONFIG_ESP32_QEMU_IMAGE), \
 			--fill-flash-size $(FLASH_SIZE) -fm $(FLASH_MODE) -ff $(FLASH_FREQ), \
-			$(ESPTOOL_FLASH_OPTS)                                                \
-		)                                                                        \
+			$(ESPTOOL_FLASH_OPTS) \
+		) \
 	)
 	$(ESPTOOL_FILE) -c esp32 merge_bin --output nuttx.merged.bin $(ESPTOOL_MERGEBIN_OPTS) $(ESPTOOL_BINS)
 	$(Q) echo nuttx.merged.bin >> nuttx.manifest
