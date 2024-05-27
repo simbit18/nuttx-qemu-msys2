@@ -89,7 +89,7 @@ jobs:
           make -j4
 
           ls -a
-          cp nuttx.bin nuttxrvvirt/nuttx.bin
+          cp nuttx nuttxrvvirt/nuttx
           cp defconfig nuttxrvvirt/defconfig
           cp System.map nuttxrvvirt/System.map
           zip -r nuttxrvvirt.zip nuttxrvvirt
