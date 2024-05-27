@@ -63,7 +63,7 @@ jobs:
           ## cd nuttx
           ls -a
           echo 'Copy tools'
-          cp -f ../tools/rv-virt/install_tools_arm64.sh install_tools_arm64.sh
+          cp -f ../tools/arm64/install_tools_arm64.sh install_tools_arm64.sh
           ls -a
           ./install_tools_arm64.sh
 
