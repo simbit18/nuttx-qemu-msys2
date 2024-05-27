@@ -75,8 +75,8 @@ jobs:
           cd nuttxspace/nuttx
           ls -a
 
-          ## Show the riscv-none-elf-gcc version
-          riscv-none-elf-gcc --version
+          ## Show the aarch64-none-elf-gcc version
+          aarch64-none-elf-gcc --version
 
           ## Configure the build
           ./tools/configure.sh -g qemu-armv8a:nsh_smp
