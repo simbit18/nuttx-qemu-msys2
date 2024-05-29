@@ -86,7 +86,7 @@ jobs:
           ## Preserve the build config
           cp .config nuttxrvvirt/nuttx.config
 
-          make -j4
+          make -j$(nproc)
 
           ls -a
           cp nuttx nuttxrvvirt/nuttx
