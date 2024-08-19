@@ -43,8 +43,9 @@ jobs:
         run: |
           echo 'pip3 install'
           uname
+          python3 -m venv --system-site-packages /usr/local
           pip3 install --root-user-action=ignore --no-cache-dir pyelftools cxxfilt kconfiglib
-          
+
       - name: Checkout Source Files
         run: |
           echo 'Checkout Source Files'
