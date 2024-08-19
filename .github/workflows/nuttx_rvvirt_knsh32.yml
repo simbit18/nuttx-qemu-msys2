@@ -1,4 +1,4 @@
-name: Nuttx-rv-virt-knsh32 QEMU
+name: Nuttx-rv-virt-knsh QEMU
 
 permissions:
   ## Allow publishing of GitHub Release
@@ -79,8 +79,8 @@ jobs:
           ## Show the riscv-none-elf-gcc version
           riscv-none-elf-gcc --version
 
-          ## Configure the build
-          ./tools/configure.sh -g rv-virt:knsh32
+          ## Configure the build ex knsh32
+          ./tools/configure.sh -g rv-virt:knsh
 
           mkdir nuttxrvvirt
 
@@ -93,7 +93,7 @@ jobs:
           cp nuttx nuttxrvvirt/nuttx
           cp defconfig nuttxrvvirt/defconfig
           cp System.map nuttxrvvirt/System.map
-          zip -r nuttxrvvirt_knsh32.zip nuttxrvvirt
+          zip -r nuttxrvvirt_knsh.zip nuttxrvvirt
 
       - name: Get Current Date
         id: date
@@ -102,9 +102,9 @@ jobs:
       - name: Publish the GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: nuttx-rvvirt-knsh32-${{ steps.date.outputs.date }}
+          tag_name: nuttx-rvvirt-knsh-${{ steps.date.outputs.date }}
           draft: false
           prerelease: false
           generate_release_notes: false
           files: |
-            nuttxspace/nuttx/nuttxrvvirt_knsh32.zip
+            nuttxspace/nuttx/nuttxrvvirt_knsh.zip
