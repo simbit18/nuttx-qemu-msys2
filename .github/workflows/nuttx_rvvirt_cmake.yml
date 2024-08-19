@@ -83,15 +83,16 @@ jobs:
 
           ## Configure the build
           ## ./tools/configure.sh -g rv-virt:nsh
-          ## cmake -B build -DBOARD_CONFIG=rv-virt:nsh -GNinja
-          cmake -B build -DBOARD_CONFIG=rv-virt:nsh
+          cmake -B build -DBOARD_CONFIG=rv-virt:nsh -GNinja
+          ## cmake -B build -DBOARD_CONFIG=rv-virt:nsh
 
           mkdir nuttxrvvirt
 
           ## Preserve the build config
           cp build/.config nuttxrvvirt/nuttx.config
 
-          cmake --build build -v
+          ## cmake --build build -v
+          cmake --build build
 
           ls -a build
           cp build/nuttx nuttxrvvirt/nuttx
