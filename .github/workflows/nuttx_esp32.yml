@@ -49,13 +49,13 @@ jobs:
       - name: Checkout Source Files
         run: |
           echo 'Checkout Source Files'
-          mkdir nuttxspace
+          mkdir -p nuttxspace
           ls -a
           cd nuttxspace
           ## git clone https://github.com/apache/incubator-nuttx nuttx
           ## git clone https://github.com/apache/incubator-nuttx-apps apps
-          git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx.git nuttx
-          git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx-apps.git apps
+          git clone --depth 1 --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx.git nuttx
+          git clone --depth 1 --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx-apps.git apps
           ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-12.0.0.tar.gz?action=download -o nuttx.tar.gz
           ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-apps-12.0.0.tar.gz?action=download -o apps.tar.gz
           ## tar zxf nuttx.tar.gz --one-top-level=nuttx --strip-components 1
@@ -64,6 +64,12 @@ jobs:
           ## cd nuttx
           ls -a
           echo 'Copy tools'
+          # Awaiting official release 4.8 !!!
+          # https://github.com/espressif/esptool/actions/runs/9301686672
+          # v4.8.dev4
+          mkdir -p tools/esptool
+          cp -fr ../tools/esptool tools
+          ls -a tools/esptool
           cp -f ../tools/esp32/install_tools_esp.sh install_tools_esp.sh
           ls -a
           ./install_tools_esp.sh

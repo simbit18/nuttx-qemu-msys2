@@ -98,12 +98,15 @@ esp_tool() {
 
 esp_tool_dev() {
   add_path "${NUTTXTOOLS}"/esp-tool
+  # Awaiting official release 4.8 !!!
   # https://github.com/espressif/esptool/actions/runs/9301686672
   # v4.8.dev4
   if ! type esptool > /dev/null 2>&1; then
     cd "${NUTTXTOOLS}"
-    mkdir -p esp-tool
-    mv $GITHUB_WORKSPACE/esptool esp-tool
+    ls -a
+    ls -a esptool
+    mv esptool esp-tool
+    ls -a esp-tool
   fi
   command esptool version
 }
