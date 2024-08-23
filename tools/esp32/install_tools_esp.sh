@@ -96,6 +96,17 @@ esp_tool() {
   command esptool version
 }
 
+esp_tool_dev() {
+  add_path "${NUTTXTOOLS}"/esp-tool
+
+  if ! type esptool > /dev/null 2>&1; then
+    cd "${NUTTXTOOLS}"
+    mkdir -p esp-tool
+    mv ${CIWORKSPACE}/esptool esp-tool
+  fi
+  command esptool version
+}
+
 gen_romfs() {
   add_path "${NUTTXTOOLS}"/genromfs/usr/bin
 
@@ -156,7 +167,7 @@ install_build_tools() {
   mkdir -p "${NUTTXTOOLS}"
   echo "#!/usr/bin/env sh" > "${NUTTXTOOLS}"/env.sh
 
-  install="xtensa_esp32_blobs esp_tool gen_romfs kconfig_frontends rust xtensa_esp32_gcc_toolchain"
+  install="xtensa_esp32_blobs esp_tool_dev gen_romfs kconfig_frontends rust xtensa_esp32_gcc_toolchain"
 
   oldpath=$(cd . && pwd -P)
   for func in ${install}; do
