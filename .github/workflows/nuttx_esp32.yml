@@ -62,16 +62,16 @@ jobs:
           ## tar zxf apps.tar.gz --one-top-level=apps --strip-components 1
           ## ls -a
           ## cd nuttx
-          ls -a
+          ## ls -a
           echo 'Copy tools'
           # Awaiting official release 4.8 !!!
           # https://github.com/espressif/esptool/actions/runs/9301686672
           # v4.8.dev4
           mkdir -p tools/esptool
           cp -fr ../tools/esptool tools
-          ls -a tools/esptool
+          ## ls -a tools/esptool
           cp -f ../tools/esp32/install_tools_esp.sh install_tools_esp.sh
-          ls -a
+          ## ls -a
           ./install_tools_esp.sh
 
       - name: Build
