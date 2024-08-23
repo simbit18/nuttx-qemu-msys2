@@ -103,7 +103,7 @@ esp_tool_dev() {
   if ! type esptool > /dev/null 2>&1; then
     cd "${NUTTXTOOLS}"
     mkdir -p esp-tool
-    mv ${CIWORKSPACE}/esptool esp-tool
+    mv $GITHUB_WORKSPACE/esptool esp-tool
   fi
   command esptool version
 }
