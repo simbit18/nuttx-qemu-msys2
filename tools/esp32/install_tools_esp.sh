@@ -98,7 +98,8 @@ esp_tool() {
 
 esp_tool_dev() {
   add_path "${NUTTXTOOLS}"/esp-tool
-
+  # https://github.com/espressif/esptool/actions/runs/9301686672
+  # v4.8.dev4
   if ! type esptool > /dev/null 2>&1; then
     cd "${NUTTXTOOLS}"
     mkdir -p esp-tool
