@@ -91,6 +91,7 @@ jobs:
 
           ls -a
           cp nuttx nuttxarm64/nuttx
+          cp .config nuttxarm64/.config
           cp defconfig nuttxarm64/defconfig
           cp System.map nuttxarm64/System.map
           zip -r nuttxarm64.zip nuttxarm64

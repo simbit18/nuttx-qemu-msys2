@@ -107,6 +107,7 @@ jobs:
           cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
           cp nuttx.bin nuttxesp32/nuttx.bin
           cp defconfig nuttxesp32/defconfig
+          cp .config nuttxesp32/.config
           cp System.map nuttxesp32/System.map
           zip -r nuttxesp32.zip nuttxesp32
 

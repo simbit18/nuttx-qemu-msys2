@@ -97,6 +97,7 @@ jobs:
           ls -a build
           cp build/nuttx nuttxrvvirt/nuttx
           cp build/defconfig nuttxrvvirt/defconfig
+          cp build/.config nuttxrvvirt/.config
           ## cp System.map nuttxrvvirt/System.map
           zip -r nuttxrvvirt.zip nuttxrvvirt
 
