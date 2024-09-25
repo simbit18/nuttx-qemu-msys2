@@ -86,9 +86,9 @@ esp_tool() {
 
   if ! type esptool > /dev/null 2>&1; then
     local basefile
-    basefile=esptool-v4.7.0-win64
+    basefile=esptool-v4.8.0-win64
     cd "${NUTTXTOOLS}"
-    curl -O -L -s https://github.com/espressif/esptool/releases/download/v4.7.0/${basefile}.zip
+    curl -O -L -s https://github.com/espressif/esptool/releases/download/v4.8.0/${basefile}.zip
     unzip -qo ${basefile}.zip
     mv esptool-win64 esp-tool
     rm ${basefile}.zip
@@ -112,7 +112,7 @@ gen_romfs() {
   add_path "${NUTTXTOOLS}"/genromfs/usr/bin
 
   if ! type genromfs > /dev/null 2>&1; then
-    git clone https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
+    git clone --depth 1 https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
     cd "${NUTTXTOOLS}"/nuttx-tools
     tar zxf genromfs-0.5.2.tar.gz
     cd genromfs-0.5.2
@@ -126,7 +126,7 @@ kconfig_frontends() {
   add_path "${NUTTXTOOLS}"/kconfig-frontends/bin
 
   if [ ! -f "${NUTTXTOOLS}/kconfig-frontends/bin/kconfig-conf" ]; then
-    git clone https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
+    git clone --depth 1 https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
     cd "${NUTTXTOOLS}"/nuttx-tools/kconfig-frontends
     ./configure --prefix="${NUTTXTOOLS}"/kconfig-frontends \
       --enable-mconf --disable-kconfig --disable-nconf --disable-qconf \

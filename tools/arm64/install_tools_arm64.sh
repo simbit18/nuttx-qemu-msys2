@@ -40,7 +40,7 @@ arm64_gcc_toolchain() {
     basefile=arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-aarch64-none-elf
     cd "${NUTTXTOOLS}"
     # Download the latest ARM64 GCC toolchain prebuilt by ARM
-    wget --quiet https://developer.arm.com/-/media/Files/downloads/gnu/13.2.Rel1/binrel/${basefile}.zip
+    curl -O -L https://developer.arm.com/-/media/Files/downloads/gnu/13.2.Rel1/binrel/${basefile}.zip
     unzip -qo ${basefile}.zip
     mv ${basefile} gcc-aarch64-none-elf
     rm ${basefile}.zip
@@ -53,7 +53,7 @@ gen_romfs() {
   add_path "${NUTTXTOOLS}"/genromfs/usr/bin
 
   if ! type genromfs > /dev/null 2>&1; then
-    git clone https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
+    git clone --depth 1 https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
     cd "${NUTTXTOOLS}"/nuttx-tools
     tar zxf genromfs-0.5.2.tar.gz
     cd genromfs-0.5.2
@@ -67,7 +67,7 @@ kconfig_frontends() {
   add_path "${NUTTXTOOLS}"/kconfig-frontends/bin
 
   if [ ! -f "${NUTTXTOOLS}/kconfig-frontends/bin/kconfig-conf" ]; then
-    git clone https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
+    git clone --depth 1 https://bitbucket.org/nuttx/tools.git "${NUTTXTOOLS}"/nuttx-tools
     cd "${NUTTXTOOLS}"/nuttx-tools/kconfig-frontends
     ./configure --prefix="${NUTTXTOOLS}"/kconfig-frontends \
       --enable-mconf --disable-kconfig --disable-nconf --disable-qconf \
