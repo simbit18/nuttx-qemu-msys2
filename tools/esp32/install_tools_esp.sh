@@ -168,7 +168,7 @@ install_build_tools() {
   mkdir -p "${NUTTXTOOLS}"
   echo "#!/usr/bin/env sh" > "${NUTTXTOOLS}"/env.sh
 
-  install="xtensa_esp32_blobs esp_tool_dev gen_romfs kconfig_frontends rust xtensa_esp32_gcc_toolchain"
+  install="xtensa_esp32_blobs esp_tool gen_romfs kconfig_frontends rust xtensa_esp32_gcc_toolchain"
 
   oldpath=$(cd . && pwd -P)
   for func in ${install}; do
