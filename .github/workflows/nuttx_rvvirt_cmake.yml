@@ -56,8 +56,8 @@ jobs:
           ## git clone https://github.com/apache/incubator-nuttx-apps apps
           ## git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx.git nuttx
           ## git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx-apps.git apps
-          git clone --depth 1 --single-branch --branch simbit18-cmake https://github.com/simbit18/nuttx.git nuttx
-          git clone --depth 1 --single-branch --branch simbit18-cmake https://github.com/simbit18/nuttx-apps.git apps
+          git clone --single-branch --branch simbit18-cmake https://github.com/simbit18/nuttx.git nuttx
+          git clone --single-branch --branch simbit18-cmake https://github.com/simbit18/nuttx-apps.git apps
           ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-12.0.0.tar.gz?action=download -o nuttx.tar.gz
           ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-apps-12.0.0.tar.gz?action=download -o apps.tar.gz
           ## tar zxf nuttx.tar.gz --one-top-level=nuttx --strip-components 1
@@ -97,6 +97,7 @@ jobs:
           ls -a build
           cp build/nuttx nuttxrvvirt/nuttx
           cp build/defconfig nuttxrvvirt/defconfig
+          cp build/.config nuttxrvvirt/.config
           ## cp System.map nuttxrvvirt/System.map
           zip -r nuttxrvvirt.zip nuttxrvvirt
 

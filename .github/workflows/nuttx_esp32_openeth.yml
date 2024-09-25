@@ -54,8 +54,8 @@ jobs:
           cd nuttxspace
           ## git clone https://github.com/apache/incubator-nuttx nuttx
           ## git clone https://github.com/apache/incubator-nuttx-apps apps
-          git clone --depth 1 --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx.git nuttx
-          git clone --depth 1 --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx-apps.git apps
+          git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx.git nuttx
+          git clone --single-branch --branch simbit18-20240306 https://github.com/simbit18/nuttx-apps.git apps
           ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-12.0.0.tar.gz?action=download -o nuttx.tar.gz
           ## curl -L https://www.apache.org/dyn/closer.lua/nuttx/12.0.0/apache-nuttx-apps-12.0.0.tar.gz?action=download -o apps.tar.gz
           ## tar zxf nuttx.tar.gz --one-top-level=nuttx --strip-components 1
@@ -107,6 +107,7 @@ jobs:
           cp nuttx.merged.bin nuttxesp32/nuttx.merged.bin
           cp nuttx.bin nuttxesp32/nuttx.bin
           cp defconfig nuttxesp32/defconfig
+          cp .config nuttxesp32/.config
           cp System.map nuttxesp32/System.map
           zip -r nuttxesp32.zip nuttxesp32
 
