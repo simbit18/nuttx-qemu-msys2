@@ -67,8 +67,8 @@ jobs:
           # Awaiting official release 4.8 !!!
           # https://github.com/espressif/esptool/actions/runs/9301686672
           # v4.8.dev4
-          mkdir -p tools/esptool
-          cp -fr ../tools/esptool tools
+          # mkdir -p tools/esptool
+          # cp -fr ../tools/esptool tools
           ## ls -a tools/esptool
           cp -f ../tools/esp32/install_tools_esp.sh install_tools_esp.sh
           ## ls -a
